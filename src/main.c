@@ -2,7 +2,6 @@
 
 #include <stddef.h>
 #include "../third-party/stivale/stivale2.h"
-#include "stivale.h"
 #include "idt.h"
 #include "interrupts.h"
 #include "log.h"
