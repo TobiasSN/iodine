@@ -14,13 +14,13 @@ LIMINE_DIR := third-party/limine
 LINKER_SCRIPT := linker.ld
 KERNEL := $(OUT_DIR)/kernel.elf
 ISO := $(OUT_DIR)/image.iso
-LIMINE_INSTALL := $(LIMINE_DIR)/limine-install
+LIMINE_DEPLOY := $(LIMINE_DIR)/limine-deploy
 ROOT_FILES := \
 	$(KERNEL) \
 	limine.cfg \
 	$(LIMINE_DIR)/limine.sys \
 	$(LIMINE_DIR)/limine-cd.bin \
-	$(LIMINE_DIR)/limine-eltorito-efi.bin
+	$(LIMINE_DIR)/limine-cd-efi.bin
 
 # User controllable flags
 CFLAGS ?= -O2 -g
@@ -56,7 +56,7 @@ XORRISO_FLAGS := \
 	-no-emul-boot \
 	-boot-load-size 4 \
 	-boot-info-table \
-	--efi-boot limine-eltorito-efi.bin \
+	--efi-boot limine-cd-efi.bin \
 	-efi-boot-part \
 	--efi-boot-image \
 	--protective-msdos-label
@@ -85,13 +85,13 @@ all: iso
 .PHONY: iso
 iso: $(ISO)
 
-$(ISO): $(ROOT_FILES) $(LIMINE_INSTALL)
+$(ISO): $(ROOT_FILES) $(LIMINE_DEPLOY)
 	$(dir_guard)
 	rm -rf $(ROOT_DIR)
 	mkdir $(ROOT_DIR)
 	cp -v $(ROOT_FILES) $(ROOT_DIR)/
 	xorriso $(XORRISO_FLAGS) $(ROOT_DIR) -o $@
-	$(LIMINE_INSTALL) $(ISO)
+	$(LIMINE_DEPLOY) $(ISO)
 
 $(KERNEL): $(O_FILES)
 	$(dir_guard)
@@ -105,8 +105,8 @@ $(OBJECTS_DIR)/%.o: $(SRC_DIR)/%.asm
 	$(dir_guard)
 	$(AS) $(ASFLAGS) -o $@ $<
 
-$(LIMINE_INSTALL):
-	$(MAKE) -C third-party/limine limine-install
+$(LIMINE_DEPLOY):
+	$(MAKE) -C third-party/limine limine-deploy
 
 .PHONY: run
 run: iso
