@@ -26,7 +26,7 @@ void _start(struct stivale2_struct* stivale2_struct) {
 
 	term_write = (void*) terminal_tag->term_write;
 
-	term_write("Setting up interrupts...", 24);
+	term_write("Welcome to Iodine!\n", 19);
 
 	interrupts_init();
 	idt_init();
