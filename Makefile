@@ -70,6 +70,9 @@ else
 QEMU_FLAGS := -serial stdio
 endif
 
+# Utility that ensures that the target's directory exists.
+dir_guard = @mkdir -p $(@D)
+
 C_FILES := $(shell find $(SRC_DIR) -type f -name "*.c")
 ASM_FILES := $(shell find $(SRC_DIR) -type f -name "*.asm")
 O_FILES := \
@@ -83,6 +86,7 @@ all: iso
 iso: $(ISO)
 
 $(ISO): $(ROOT_FILES) $(LIMINE_INSTALL)
+	$(dir_guard)
 	rm -rf $(ROOT_DIR)
 	mkdir $(ROOT_DIR)
 	cp -v $(ROOT_FILES) $(ROOT_DIR)/
@@ -90,12 +94,15 @@ $(ISO): $(ROOT_FILES) $(LIMINE_INSTALL)
 	$(LIMINE_INSTALL) $(ISO)
 
 $(KERNEL): $(O_FILES)
+	$(dir_guard)
 	$(CC) $^ $(LDFLAGS) -o $@
 
 $(OBJECTS_DIR)/%.o: $(SRC_DIR)/%.c
+	$(dir_guard)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJECTS_DIR)/%.o: $(SRC_DIR)/%.asm
+	$(dir_guard)
 	$(AS) $(ASFLAGS) -o $@ $<
 
 $(LIMINE_INSTALL):
