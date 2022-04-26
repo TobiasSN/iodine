@@ -8,20 +8,11 @@
 #include "common.h"
 #include "stivale.h"
 
-// Stivale terminal
-static struct stivale2_header_tag_terminal terminal_header_tag = {
-	.tag = {
-		.identifier = STIVALE2_HEADER_TAG_TERMINAL_ID,
-		.next = 0
-	},
-	.flags = 0
-};
-
 // Stivale framebuffer
 static struct stivale2_header_tag_framebuffer framebuffer_header_tag = {
 	.tag = {
 		.identifier = STIVALE2_HEADER_TAG_FRAMEBUFFER_ID,
-		.next = (uint64_t) &terminal_header_tag
+		.next = 0
 	},
 	// Let the bootloader pick the best framebuffer options
 	.framebuffer_width = 0,
