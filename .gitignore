@@ -1,0 +1,8 @@
+build/
+
+# CLion
+.idea/**/workspace.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+cmake-build-*/
