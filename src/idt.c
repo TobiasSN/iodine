@@ -24,7 +24,7 @@ void idt_register(uint8_t number, void (handler)(), enum gate_type type) {
 	entry->offset_1 = (uint16_t) handler_address;
 	entry->offset_2 = (uint16_t) (handler_address >> 16);
 	entry->offset_3 = (uint32_t) (handler_address >> 32);
-	entry->selector = 0x28; // Stivale 64-bit code descriptor
+	entry->selector = 0x28; // Limine 64-bit code descriptor
 	entry->interrupt_stack_table_offset = 0;
 	entry->attributes = 0b10001110 | type; // No Interrupt Stack Table
 	entry->reserved = 0;
