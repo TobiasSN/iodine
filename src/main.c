@@ -8,7 +8,7 @@
 
 void (*term_write)(const char* string, size_t length);
 
-void _start(struct stivale2_struct* stivale2_struct) {
+void _start() {
 	log_string("Welcome to Iodine!\n");
 
 	interrupts_init();
