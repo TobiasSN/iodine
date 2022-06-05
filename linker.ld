@@ -23,11 +23,6 @@ SECTIONS {
 
     . += CONSTANT(MAXPAGESIZE);
 
-    /* Ensure that the Stivale2 header doesn't get discarded */
-    .stivale2hdr : {
-        KEEP(*(.stivale2hdr))
-    } :rodata
-
     .rodata : {
         *(.rodata .rodata.*)
     } :rodata

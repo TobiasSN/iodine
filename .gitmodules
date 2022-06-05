@@ -1,6 +1,3 @@
 [submodule "third-party/limine"]
 	path = third-party/limine
 	url = https://github.com/limine-bootloader/limine.git
-[submodule "third-party/stivale"]
-	path = third-party/stivale
-	url = https://github.com/stivale/stivale.git
