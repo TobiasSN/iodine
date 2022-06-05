@@ -55,14 +55,14 @@ void panic(struct cpu_state* state) {
 	log_register("RBP", state->rbp);
 	log_register(" R8", state->r8);
 	log_char('\n');
-	log_register(" R9", state->r8);
-	log_register("R10", state->r8);
-	log_register("R11", state->r8);
-	log_register("R12", state->r8);
+	log_register(" R9", state->r9);
+	log_register("R10", state->r10);
+	log_register("R11", state->r11);
+	log_register("R12", state->r12);
 	log_char('\n');
-	log_register("R13", state->r8);
-	log_register("R14", state->r8);
-	log_register("R15", state->r8);
+	log_register("R13", state->r13);
+	log_register("R14", state->r14);
+	log_register("R15", state->r15);
 
 	log_string("\n\n");
 	log_register("RIP", state->rip);
