@@ -70,6 +70,9 @@ void panic(struct cpu_state* state) {
 	log_register("RFLAGS", state->rflags);
 	log_register("RSP", state->rsp);
 
+	// Prevent further interrupts
+	asm ("cli");
+
 	while (1) {
 		asm ("hlt");
 	}
