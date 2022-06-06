@@ -70,5 +70,7 @@ void panic(struct cpu_state* state) {
 	log_register("RFLAGS", state->rflags);
 	log_register("RSP", state->rsp);
 
-	while (1) {}
+	while (1) {
+		asm ("hlt");
+	}
 }
